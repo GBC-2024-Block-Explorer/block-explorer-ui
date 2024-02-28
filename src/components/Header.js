@@ -7,14 +7,14 @@ import { useNavigate } from "react-router-dom";
 // Custom styled AppBar for a blockchain-themed background
 const BlockchainAppBar = styled(AppBar)({
   backgroundColor: "#000000", // Dark background
-  color: "#FFFFFF", // White text
+  color: "#white", // White text
   boxShadow: "none", // Remove shadow for a flat design
 });
 
 // Custom styled Button for navigation links and search button
 const NavButton = styled(Button)({
   textTransform: "none", // Prevent uppercase text
-  color: "#FFFFFF", // Ensure text color is white
+  color: "white", // Ensure text color is white
   "&:hover": {
     backgroundColor: "rgba(255,   255,   255,   0.1)", // Lighten background on hover
   },

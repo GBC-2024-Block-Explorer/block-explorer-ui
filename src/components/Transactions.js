@@ -1,23 +1,24 @@
-// src/Transactions.js
-import React from "react";
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Transactions = () => {
-  // Mock data for transactions
-  const transactions = [
-    // Add more transactions as needed
-  ];
+ const location = useLocation();
+ const transfer = location.state?.transfer;
 
-  return (
+ return (
     <div>
-      <ul>
-        {transactions.map((transaction) => (
-          <li key={transaction.id}>
-            {transaction.from} to {transaction.to} - {transaction.amount}
-          </li>
-        ))}
-      </ul>
+      {transfer ? (
+        <div>
+          <h2>Transfer Details</h2>
+          <p>From: {transfer.fromAddress}</p>
+          <p>To: {transfer.toAddress}</p>
+          <p>Amount: {transfer.amount}</p>
+        </div>
+      ) : (
+        <p>No transfer details available.</p>
+      )}
     </div>
-  );
+ );
 };
 
 export default Transactions;

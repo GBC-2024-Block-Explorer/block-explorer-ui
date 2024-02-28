@@ -3,19 +3,20 @@ import { Button, TextField, Typography, Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Transfer = () => {
-  const navigate = useNavigate();
-  const [fromAddress, setFromAddress] = useState("");
-  const [toAddress, setToAddress] = useState("");
-  const [amount, setAmount] = useState("");
+ const navigate = useNavigate();
+ const [fromAddress, setFromAddress] = useState("");
+ const [toAddress, setToAddress] = useState("");
+ const [amount, setAmount] = useState("");
 
-  const handleSubmit = (e) => {
+ const handleSubmit = (e) => {
     e.preventDefault();
     console.log(`Transfer from ${fromAddress} to ${toAddress} for ${amount}`);
 
-    navigate("/transactions");
-  };
+    // Pass the transfer details in the state
+    navigate("/transactions", { state: { transfer: { fromAddress, toAddress, amount } } });
+ };
 
-  return (
+ return (
     <Box sx={{ padding: "16px", maxWidth: "600px", margin: "auto" }}>
       <Typography variant="h4" gutterBottom>
         Transfers
@@ -54,7 +55,7 @@ const Transfer = () => {
         </Button>
       </form>
     </Box>
-  );
+ );
 };
 
 export default Transfer;
