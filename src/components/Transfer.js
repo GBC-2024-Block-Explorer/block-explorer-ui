@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Header from "./Header";
 import { mockReceipt } from "./mock";
+import Receipt from "./Receipt";
 
 function Transfer() {
   const [fromAddress, setFromAddress] = useState("");
@@ -9,20 +10,26 @@ function Transfer() {
   const [receipt, setReceipt] = useState(null);
   const [showReceipt, setShowReceipt] = useState(false);
 
+  const mockReceipt = {
+    transactionHash: "123456",
+    date: "2024-02-28",
+    status: "SUCCESS",
+    gasUsed: "2222",
+    blockHash: "dsfg$5234",
+    blockNumber: "42"
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const mockReceipt = {
-      transactionId: "123456",
-      date: "2024-02-28",
-      status: "SUCCESS",
-    };
+    
 
     setReceipt(mockReceipt);
     setShowReceipt(true);
   };
 
-  const handleCancel = () => {
+  const handleCancel = (e) => {
+    e.preventDefault();
     setShowReceipt(false);
     setReceipt(null);
     setFromAddress("");
@@ -51,7 +58,7 @@ function Transfer() {
         <button type="submit">SUBMIT</button>
         <br />
         <button onClick={handleCancel}>Cancel</button>
-        {showReceipt && (
+        {/* {showReceipt && (
           <div>
             <p>To Address - {toAddress}</p>
             <p>From Address - {fromAddress}</p>
@@ -60,7 +67,18 @@ function Transfer() {
             <p>Status - {receipt.status}</p>
             <p>Date - {receipt.date}</p>
           </div>
-        )}
+        )} */}
+        {showReceipt ?
+          <Receipt
+            toAddress={toAddress}
+            fromAddress={fromAddress}
+            amount={amount}
+            transactionHash={mockReceipt.transactionHash}
+            gasUsed={mockReceipt.gasUsed}
+            blockHash={mockReceipt.blockHash}
+            blockNumber={mockReceipt.blockNumber}
+          /> : <h1>Please Enter the details</h1>
+        }
       </form>
     </div>
   );
