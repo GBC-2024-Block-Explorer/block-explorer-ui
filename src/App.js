@@ -2,15 +2,15 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme";
-import Header from "./Header";
-import Transactions from "./Transactions";
-import Blocks from "./Blocks";
-import Transfer from "./Transfer";
+import Theme from "./components/Theme";
+import Header from "./components/Header";
+import Transactions from "./components/Transactions";
+import Blocks from "./components/Blocks";
+import Transfer from "./components/Transfer";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={Theme}>
       <Router>
         <Header />
         <Routes>
