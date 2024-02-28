@@ -1,61 +1,69 @@
 import React, { useState } from "react";
-import { Button, TextField, Typography, Box } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import { mockReceipt } from "./mock";
 
-const Transfer = () => {
- const navigate = useNavigate();
- const [fromAddress, setFromAddress] = useState("");
- const [toAddress, setToAddress] = useState("");
- const [amount, setAmount] = useState("");
+function Transfer() {
+  const [fromAddress, setFromAddress] = useState("");
+  const [toAddress, setToAddress] = useState("");
+  const [amount, setAmount] = useState("");
+  const [receipt, setReceipt] = useState(null);
+  const [showReceipt, setShowReceipt] = useState(false);
 
- const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(`Transfer from ${fromAddress} to ${toAddress} for ${amount}`);
 
-    // Pass the transfer details in the state
-    navigate("/transactions", { state: { transfer: { fromAddress, toAddress, amount } } });
- };
+    const mockReceipt = {
+      transactionId: "123456",
+      date: "2024-02-28",
+      status: "SUCCESS",
+    };
 
- return (
-    <Box sx={{ padding: "16px", maxWidth: "600px", margin: "auto" }}>
-      <Typography variant="h4" gutterBottom>
-        Transfers
-      </Typography>
+    setReceipt(mockReceipt);
+    setShowReceipt(true);
+  };
+
+  const handleCancel = () => {
+    setShowReceipt(false);
+    setReceipt(null);
+    setFromAddress("");
+    setToAddress("");
+    setAmount("");
+  };
+  return (
+    <div>
+      <Header title="Transfers" />
       <form onSubmit={handleSubmit}>
-        <TextField
-          label="From Address"
-          variant="outlined"
-          value={fromAddress}
-          onChange={(e) => setFromAddress(e.target.value)}
-          fullWidth
-        />
-        <TextField
-          label="To Address"
-          variant="outlined"
-          value={toAddress}
-          onChange={(e) => setToAddress(e.target.value)}
-          fullWidth
-        />
-        <TextField
-          label="Amount"
-          variant="outlined"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          fullWidth
-        />
-        <Button type="submit" variant="contained" color="primary">
-          Submit
-        </Button>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={() => navigate("/transactions")}
-        >
-          Cancel
-        </Button>
+        <label>From Address</label>
+        <select onChange={(e) => setFromAddress(e.target.value)}>
+          <option>0xb84</option>
+          <option>0x91e</option>
+        </select>
+        <br />
+        <label>To Address</label>
+        <select onChange={(e) => setToAddress(e.target.value)}>
+          <option>0x1s4</option>
+          <option>0x7we</option>
+        </select>
+        <br />
+        <label>Amount</label>
+        <input type="text" onChange={(e) => setAmount(e.target.value)} />
+        <br />
+        <button type="submit">SUBMIT</button>
+        <br />
+        <button onClick={handleCancel}>Cancel</button>
+        {showReceipt && (
+          <div>
+            <p>To Address - {toAddress}</p>
+            <p>From Address - {fromAddress}</p>
+            <p>Amount - {amount}</p>
+            <p>TransactionId - {receipt.transactionId}</p>
+            <p>Status - {receipt.status}</p>
+            <p>Date - {receipt.date}</p>
+          </div>
+        )}
       </form>
-    </Box>
- );
-};
+    </div>
+  );
+}
 
 export default Transfer;

@@ -1,24 +1,31 @@
-import React from 'react';
-import { useLocation } from 'react-router-dom';
+import React from "react";
+import Header from "./Header";
+import { mockTransactions } from "./mock";
 
-const Transactions = () => {
- const location = useLocation();
- const transfer = location.state?.transfer;
-
- return (
+function Transactions() {
+  return (
     <div>
-      {transfer ? (
-        <div>
-          <h2>Transfer Details</h2>
-          <p>From: {transfer.fromAddress}</p>
-          <p>To: {transfer.toAddress}</p>
-          <p>Amount: {transfer.amount}</p>
-        </div>
-      ) : (
-        <p>No transfer details available.</p>
-      )}
+      <Header title="Transaction History" />
+      <table>
+        <tr>
+          <th>Source</th>
+          <th>Destination</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>gasUsed</th>
+          <th>receiptHash</th>
+        </tr>
+        <tr>
+          <td>{mockTransactions[0].source}</td>
+          <td>{mockTransactions[0].destination}</td>
+          <td>{mockTransactions[0].amount}</td>
+          <td>{mockTransactions[0].status}</td>
+          <td>{mockTransactions[0].gasUsed}</td>
+          <td>{mockTransactions[0].receiptHash}</td>
+        </tr>
+      </table>
     </div>
- );
-};
+  );
+}
 
 export default Transactions;
