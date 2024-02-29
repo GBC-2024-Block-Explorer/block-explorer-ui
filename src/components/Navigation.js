@@ -1,27 +1,25 @@
 import React from "react";
-import { BrowserRouter as Router, Link, Route, Routes } from "react-router-dom";
-import Transactions from "./Transactions";
-import Transfer from "./Transfer";
-import Blocks from "./Blocks";
+import { AppBar, Toolbar, Button, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 
 function Navigation() {
   return (
     <div>
-      <h1>Navigation</h1>
-      <Router>
-        <nav>
-          <Link to="/">Transactions</Link>
-          <Link to="/transfer">Transfer</Link>
-          <Link to="/blocks">Blocks</Link>
-          <Link to="/accounts">Accounts</Link>
-        </nav>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography>Block Explorer</Typography>
 
-        <Routes>
-          <Route path="/" element={<Transactions />} />
-          <Route path="/transfer" element={<Transfer />} />
-          <Route path="/blocks" element={<Blocks />} />
-        </Routes>
-      </Router>
+          <Button color="inherit" component={Link} to="/transactions">
+            Transactions
+          </Button>
+          <Button color="inherit" component={Link} to="/transfer">
+            Transfer
+          </Button>
+          <Button color="inherit" component={Link} to="/blocks">
+            Blocks
+          </Button>
+        </Toolbar>
+      </AppBar>
     </div>
   );
 }
