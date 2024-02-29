@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Navigation() {
   return (
     <div>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ backgroundColor: '#9D44B5' }}>
         <Toolbar>
           <Typography>Block Explorer</Typography>
 

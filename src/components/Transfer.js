@@ -64,7 +64,7 @@ function Transfer() {
         >
           <MenuItem value=""></MenuItem>
           {source.map((address, index) => (
-            <MenuItem value={address}>{address}</MenuItem>
+            <MenuItem key={index} value={address}>{address}</MenuItem>
           ))}
         </Select>
         <br />
@@ -78,7 +78,7 @@ function Transfer() {
         >
           <MenuItem value=""></MenuItem>
           {destination.map((address, index) => (
-            <MenuItem value={address}>{address}</MenuItem>
+            <MenuItem key={index} value={address}>{address}</MenuItem>
           ))}
         </Select>
         <br />
