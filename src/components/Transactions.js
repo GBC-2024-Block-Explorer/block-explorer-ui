@@ -1,8 +1,24 @@
 import React from "react";
 import Header from "./Header";
-import { mockTransactions } from "./mock";
+// import { mockTransactions, source, destination, amount, gasUsed, receiptHash } from "./mock";
+import { faker } from "@faker-js/faker";
 
 function Transactions() {
+
+  const source = [];
+  const destination = [];
+  const amount = [];
+  const gasUsed = [];
+  const receiptHash = [];
+
+  for (let i = 0; i < 5; i++) {
+    source.push(faker.finance.ethereumAddress());
+    destination.push(faker.finance.ethereumAddress());
+    amount.push(faker.finance.amount());
+    gasUsed.push(faker.finance.amount({ min: 1000, max: 9999, dec: 0 }));
+    receiptHash.push(faker.git.commitSha());
+  }
+  // console.log(source);
   return (
     <div>
       <Header title="Transaction History" />
@@ -15,14 +31,16 @@ function Transactions() {
           <th>gasUsed</th>
           <th>receiptHash</th>
         </tr>
-        <tr>
-          <td>{mockTransactions[0].source}</td>
-          <td>{mockTransactions[0].destination}</td>
-          <td>{mockTransactions[0].amount}</td>
-          <td>{mockTransactions[0].status}</td>
-          <td>{mockTransactions[0].gasUsed}</td>
-          <td>{mockTransactions[0].receiptHash}</td>
-        </tr>
+        
+        {source.map((address, index) => (
+          <tr key={index}>
+            <td>{source[index]}</td>
+            <td>{destination[index]}</td>
+            <td>{amount[index]}</td>
+            <td>{gasUsed[index]}</td>
+            <td>{receiptHash[index]}</td>
+          </tr>
+        ))}
       </table>
     </div>
   );
