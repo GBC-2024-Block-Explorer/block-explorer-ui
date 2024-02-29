@@ -3,6 +3,13 @@ import Header from "./Header";
 import Receipt from "./Receipt";
 import { faker } from "@faker-js/faker";
 
+import Box from "@mui/material/Box";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import { Button, TextField } from "@mui/material";
+
 const source = [];
 const destination = [];
 const blockNumber = faker.number.int({ min: 10, max: 100 });
@@ -41,51 +48,71 @@ function Transfer() {
     e.preventDefault();
     setShowReceipt(false);
     // setReceipt(null);
-    setFromAddress("");
-    setToAddress("");
-    setAmount("");
+    setFromAddress(false);
+    setToAddress(false);
+    setAmount(false);
   };
   return (
     <div>
       <Header title="Transfers" />
-      <form onSubmit={handleSubmit}>
-        <label>From Address</label>
-        <select onChange={(e) => setFromAddress(e.target.value)}>
-          <option value=""></option>
+      {/* /// */}
+      <FormControl sx={{ m: 1, minWidth: 430 }}>
+        <InputLabel>From Address</InputLabel>
+        <Select
+          label="From Address"
+          onChange={(e) => setFromAddress(e.target.value)}
+        >
+          <MenuItem value=""></MenuItem>
           {source.map((address, index) => (
-            <option>{address}</option>
+            <MenuItem value={address}>{address}</MenuItem>
           ))}
-        </select>
+        </Select>
         <br />
-        <label>To Address</label>
-        <select onChange={(e) => setToAddress(e.target.value)}>
-          <option value=""></option>
+      </FormControl>
+      <br />
+      <FormControl sx={{ m: 1, minWidth: 430 }}>
+        <InputLabel>To Address</InputLabel>
+        <Select
+          label="To Address"
+          onChange={(e) => setToAddress(e.target.value)}
+        >
+          <MenuItem value=""></MenuItem>
           {destination.map((address, index) => (
-            <option>{address}</option>
+            <MenuItem value={address}>{address}</MenuItem>
           ))}
-        </select>
+        </Select>
         <br />
-        <label>Amount</label>
-        <input type="text" onChange={(e) => setAmount(e.target.value)} />
+        {/* <label>Amount</label> */}
+        {/* <input type="text" onChange={(e) => setAmount(e.target.value)} /> */}
+        <TextField
+          id="standard-basic"
+          label="Amount"
+          variant="standard"
+          onChange={(e) => setAmount(e.target.value)}
+        />
         <br />
-        <button type="submit">SUBMIT</button>
+        <Button variant="outlined" type="submit" onClick={handleSubmit}>
+          SUBMIT
+        </Button>
         <br />
-        <button onClick={handleCancel}>Cancel</button>
-        
-        {showReceipt ? (
-          <Receipt
-            toAddress={toAddress}
-            fromAddress={fromAddress}
-            amount={amount}
-            transactionHash={transactionHash}
-            gasUsed={gasUsed}
-            blockHash={blockHash}
-            blockNumber={blockNumber}
-          />
-        ) : (
-          <h1>Please Enter the details</h1>
-        )}
-      </form>
+        <Button variant="outlined" onClick={handleCancel}>
+          Cancel
+        </Button>
+      </FormControl>
+      {showReceipt ? (
+        <Receipt
+          toAddress={toAddress}
+          fromAddress={fromAddress}
+          amount={amount}
+          transactionHash={transactionHash}
+          gasUsed={gasUsed}
+          blockHash={blockHash}
+          blockNumber={blockNumber}
+        />
+      ) : (
+        <h1>Please Enter the details</h1>
+      )}
+      {/* </FormControl> */}
     </div>
   );
 }

@@ -2,6 +2,15 @@ import React from "react";
 import Header from "./Header";
 // import { mockTransactions, source, destination, amount, gasUsed, receiptHash } from "./mock";
 import { faker } from "@faker-js/faker";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 
 
 function Transactions() {
@@ -23,7 +32,7 @@ function Transactions() {
   return (
     <div>
       <Header title="Transaction History" />
-      <table>
+      {/* <table>
         <tr>
           <th>Source</th>
           <th>Destination</th>
@@ -42,7 +51,32 @@ function Transactions() {
             <td>{receiptHash[index]}</td>
           </tr>
         ))}
-      </table>
+      </table> */}
+      <TableContainer component={Paper} sx={{ width: '70%', margin: 'auto', backgroundColor: '#212738' }}>
+        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell sx={{ color: 'white' }}>Source</TableCell>
+              <TableCell sx={{ color: 'white' }}>Destination</TableCell>
+              <TableCell sx={{ color: 'white' }}>Amount</TableCell>
+              {/* <TableCell sx={{ color: 'white' }}>Status</TableCell> */}
+              <TableCell sx={{ color: 'white' }}>Gas used</TableCell>
+              <TableCell sx={{ color: 'white' }}>Receipt Hash</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+          {source.map((address, index) => (
+          <TableRow key={index}>
+            <TableCell sx={{ color: 'white' }}>{source[index]}</TableCell>
+            <TableCell sx={{ color: 'white' }}>{destination[index]}</TableCell>
+            <TableCell sx={{ color: 'white' }}>{amount[index]}</TableCell>
+            <TableCell sx={{ color: 'white' }}>{gasUsed[index]}</TableCell>
+            <TableCell sx={{ color: 'white' }}>{receiptHash[index]}</TableCell>
+          </TableRow>
+        ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </div>
   );
 }

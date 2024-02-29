@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import BlockDetails from "./BlockDetails";
 import { faker } from "@faker-js/faker";
+import Header from "./Header";
+import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
 const address = [];
 
@@ -26,15 +28,22 @@ function Blocks() {
 
   return (
     <div>
-      <h1>Blocks</h1>
-      <select onChange={handleOnChange}>
-        <option value=""></option>
-        {address.map((address) => (
-          <option>{address}</option>
-        ))}
-      </select>
+      <Header title="Blocks" />
+      <FormControl sx={{ m: 1, minWidth: 430 }}>
+        <InputLabel>Ethereum Address</InputLabel>
+        <Select label="Ethereum Address" onChange={handleOnChange}>
+          <MenuItem value=""></MenuItem>
+          {address.map((address) => (
+            <MenuItem value={address}>{address}</MenuItem>
+          ))}
+        </Select>
+      </FormControl>
       {selectedBlock ? (
-        <BlockDetails address={selectedAddress} balance={balance} gasUsed={gasUsed} />
+        <BlockDetails
+          address={selectedAddress}
+          balance={balance}
+          gasUsed={gasUsed}
+        />
       ) : (
         <h1>Ethereum Address is required</h1>
       )}
