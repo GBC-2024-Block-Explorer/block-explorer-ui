@@ -4,13 +4,13 @@ import { faker } from "@faker-js/faker";
 import Header from "./Header";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const address = [];
+// const address = [];
 
-for (let i = 0; i < 5; i++) {
-  address.push(faker.finance.ethereumAddress());
-  // destination.push(faker.finance.ethereumAddress());
-  // receiptHash.push(faker.git.commitSha());
-}
+// for (let i = 0; i < 5; i++) {
+//   address.push(faker.finance.ethereumAddress());
+//   // destination.push(faker.finance.ethereumAddress());
+//   // receiptHash.push(faker.git.commitSha());
+// }
 
 function Blocks() {
   const [ethereumAddresses, setEthereumAddresses] = useState("");
