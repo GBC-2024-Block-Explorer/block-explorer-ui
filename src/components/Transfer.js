@@ -36,12 +36,39 @@ function Transfer() {
   //   blockHash: "dsfg$5234",
   //   blockNumber: "42",
   // };
+  const data = {
+    source: fromAddress,
+    destination: toAddress,
+    amount: amount
+  };
+  const params = new URLSearchParams(data).toString();
+
+  const sendTransaction = async () => {
+    console.log("sendTransaction function");
+    const response = await fetch("http://localhost:5000/transactions/send", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params
+    });
+    console.log("sendTransaction function2",params);
+
+    if (response.ok) {
+      console.log("Transaction sent successfully");
+    } else {
+      console.error("Error sending transaction:", response.statusText);
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     // setReceipt(mockReceipt);
     setShowReceipt(true);
+
+    sendTransaction();
+    console.log("Sourceq", fromAddress, toAddress, amount);
   };
 
   const handleCancel = (e) => {
@@ -64,7 +91,9 @@ function Transfer() {
         >
           <MenuItem value=""></MenuItem>
           {source.map((address, index) => (
-            <MenuItem key={index} value={address}>{address}</MenuItem>
+            <MenuItem key={index} value={address}>
+              {address}
+            </MenuItem>
           ))}
         </Select>
         <br />
@@ -78,7 +107,9 @@ function Transfer() {
         >
           <MenuItem value=""></MenuItem>
           {destination.map((address, index) => (
-            <MenuItem key={index} value={address}>{address}</MenuItem>
+            <MenuItem key={index} value={address}>
+              {address}
+            </MenuItem>
           ))}
         </Select>
         <br />
